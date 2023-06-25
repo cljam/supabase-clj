@@ -1,2 +1,2 @@
-# gotrue-clj
-Supabase auth client with support clj/cljs
+# supabase-clj
+Supabase client with support clj/cljs
