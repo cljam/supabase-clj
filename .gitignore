@@ -2,7 +2,6 @@ pom.xml
 pom.xml.asc
 *.jar
 *.class
-/lib/
 /classes/
 /target/
 /checkouts/
@@ -12,3 +11,19 @@ pom.xml.asc
 .lein-failures
 .nrepl-port
 .cpcache/
+*.iml
+*.log
+
+## application
+node_modules
+.shadow-cljs
+.lsp
+.lsp/.cache
+.clj-kondo/.cache
+.calva
+.idea
+.lein-*
+.nrepl-*
+.socket-*
+
+.DS_Store
