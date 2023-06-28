@@ -3,7 +3,8 @@
    [clj-http.client :as client]
    [clojure.data.json :as json]
    [clojure.pprint :as pprint]
-   [clojure.string :as str]))
+   [clojure.string :as str]
+   [gotrue.internals.utils :as utils]))
 
 (add-tap (bound-fn* clojure.pprint/pprint))
 
@@ -13,7 +14,7 @@
       (str/replace #"_" "-")
       keyword))
 
-(defn read [payload]
+(defn read-json [payload]
   (json/read-str payload {:key-fn json->clj-keys}))
 
 (defn ^:private clj->json-keys
@@ -33,22 +34,12 @@
             :content-type :json})
     req-map))
 
-
-;(assoc-some {} :a 1 :b 2 :c nil :d false :e "") ;=> {:a 1 :b 2}
-(defn assoc-some [m & kvs]
-  (reduce (fn [acc [k v]]
-            (if (some? v)
-              (assoc acc k v)
-              acc))
-          m
-          (partition 2 kvs)))
-
-
 (defn ^:private with-options
   [req-map {:keys [options]}]
   (if options
-    (assoc-some req-map
-           :redirectTo (:emailRedirectTo options)) 
+    (utils/assoc-some
+     req-map
+     :redirectTo (:emailRedirectTo options))
     req-map))
 
 (defn config+path->url [config path]
@@ -73,12 +64,19 @@
   (-> {}
       (with-headers config)
       (with-body params)
-      (with-options params)
-      ))
+      (with-options params)))
+
+(defn redirect-to [req-map url]
+  (if (:redirectTo req-map)
+    (str url "?redirect_to=" (:redirectTo req-map))
+    url))
 
 (defn post! [path params config]
   (let [url      (config+path->url config path)
         req-map (input->req-map params config)
+        url (redirect-to req-map url)
+        _ (tap> req-map)
+        _ (tap> url)
         response (client/post url req-map)]
     (as-api-response response {})))
 
@@ -87,6 +85,7 @@
   (let [url      (config+path->url config path)
         req-map  (-> {}
                      (with-headers config))
+        _ (prn req-map)
         response (client/get url req-map)
         options  (merge {:parse? true} options)]
     (as-api-response response options)))

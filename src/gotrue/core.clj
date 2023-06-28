@@ -1,30 +1,38 @@
 (ns gotrue.core
   (:require
-   [internals.http :refer [post! get!]]))
+   [gotrue.internals.http :refer [get! post!] :as internal.http]
+   [gotrue.internals.utils :as utils]))
 
-(defn request-signin-email
-  [base-url email api-key]
-  (let [url (str base-url "/auth/v1/otp")]
-    (post! url {:body {:email email} :redirectTo "http://localhost:3000/api/auth/login"}
-           {:api-key api-key})))
+(defn signin-with-email
+  [{:keys [base-url
+           email
+           api-key
+           should-create-user
+           options]}]
+  (let [params {:body (utils/assoc-some {:email email :create-user true}
+                                        :create-user should-create-user)
+                :options options}
+        config {:api-key api-key
+                :base-url (str base-url "/auth/v1")}]
+    (post! "/otp" params config)))
 
 (defn get-user
-  [token api-key base-url]
-  (let [url (str base-url "/auth/v1/user")]
-    (read (get! url {:api-key api-key :token token}))))
+  [{:keys [base-url] :as config}]
+  (let [base-url (str base-url "/auth/v1")]
+    (internal.http/read-json (get! "/user"
+                                   (assoc config
+                                          :base-url base-url)))))
+
+(defn session-from-url [url])
 
 (defn session
   [token api-key base-url]
   (let [url (str base-url "/auth/v1/reauthenticate")]
-    (read (get! url {:api-key api-key :token token}))))
+    (internal.http/read-json (get! url {:api-key api-key :token token}))))
 
 (comment
 
-  (get-user
-   "jwt"
-   "api"
-   "url")
-
+ 
   )
 
 

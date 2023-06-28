@@ -15,13 +15,3 @@
             {})))))
 
 
-(deftest assoc-if-test
-  (testing "assoc if should work"
-    (is (= {:a 1 :b 2}
-           (http/assoc-some {} :a 1 :b 2)))
-    (is  (= {:a 1}
-            (http/assoc-some {} :a 1 :b nil)))
-    (is (= {:a 1 :b false}
-           (http/assoc-some {} :a 1 :b false)))
-    (is (= {:a 1 :b ""}
-           (http/assoc-some {} :a 1 :b "")))))
