@@ -6,6 +6,8 @@ Supabase client with support clj/cljs
 > it my change some contract or way of use it
 >
 > We have gotrue for now
+> https://github.com/supabase/gotrue
+> https://github.com/supabase/gotrue-js
 
 
 ## Install
