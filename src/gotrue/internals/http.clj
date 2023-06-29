@@ -39,7 +39,7 @@
   (if options
     (utils/assoc-some
      req-map
-     :redirectTo (:emailRedirectTo options))
+     :redirect-to (:email-redirect-to options))
     req-map))
 
 (defn config+path->url [config path]
@@ -67,16 +67,14 @@
       (with-options params)))
 
 (defn redirect-to [req-map url]
-  (if (:redirectTo req-map)
-    (str url "?redirect_to=" (:redirectTo req-map))
+  (if (:redirect-to req-map)
+    (str url "?redirect_to=" (:redirect-to req-map))
     url))
 
 (defn post! [path params config]
   (let [url      (config+path->url config path)
         req-map (input->req-map params config)
         url (redirect-to req-map url)
-        _ (tap> req-map)
-        _ (tap> url)
         response (client/post url req-map)]
     (as-api-response response {})))
 
@@ -85,7 +83,6 @@
   (let [url      (config+path->url config path)
         req-map  (-> {}
                      (with-headers config))
-        _ (prn req-map)
         response (client/get url req-map)
         options  (merge {:parse? true} options)]
     (as-api-response response options)))

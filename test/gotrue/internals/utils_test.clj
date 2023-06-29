@@ -1,4 +1,4 @@
-(ns internals.utils-test
+(ns gotrue.internals.utils-test
   (:require
    [clojure.test :refer [deftest is testing]]
    [gotrue.internals.utils :as utils]))
@@ -19,14 +19,14 @@
     (is (= {:refresh-token "kgyByE7FSwxW5r2tUjzS0w"
             :token-type "bearer"
             :expires-in "3600"
-            :type "magic-link" 
+            :type "magiclink" 
             :access-token "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhRoZW50aWNhdGVkIiwiZXhwIj4ZWU4ZjI2LTRlNjctNDA0GNhOTAxNyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6Im90cCIsInRpbWVzdGFtcCI6MTY4Nzk1M.E47xqL4Z8y9bj91FqOgZ5zzhNz4cY4KWharn1QfYTPQ"}
            (utils/extract-parameters
             "http://localhost:3000/api/auth/login#access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhRoZW50aWNhdGVkIiwiZXhwIj4ZWU4ZjI2LTRlNjctNDA0GNhOTAxNyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6Im90cCIsInRpbWVzdGFtcCI6MTY4Nzk1M.E47xqL4Z8y9bj91FqOgZ5zzhNz4cY4KWharn1QfYTPQ&expires_in=3600&refresh_token=kgyByE7FSwxW5r2tUjzS0w&token_type=bearer&type=magiclink")))
     (is (= {:a "1" :b "2"}
            (utils/extract-parameters
-            "http://t.com?a=1&b=2")))
-    (is (= {}
+            "http://t.com/#a=1&b=2")))
+    (is (= nil
            (utils/extract-parameters "http://t.com")))
-    (is (= {}
+    (is (= {:t nil}
            (utils/extract-parameters "http://t.com#t")))))

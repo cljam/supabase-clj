@@ -1,4 +1,4 @@
-(ns internals.http-test
+(ns gotrue.internals.http-test
   (:require
    [gotrue.internals.http :as http]
    [clojure.test :refer [deftest is testing]]))
