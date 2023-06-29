@@ -4,6 +4,8 @@ Supabase client with support clj/cljs
 ## Discalmer
 > This is a version we are using in an internal code, so
 > it my change some contract or way of use it
+>
+> We have gotrue for now
 
 
 ## Install
