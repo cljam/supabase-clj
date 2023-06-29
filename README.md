@@ -12,7 +12,7 @@ Supabase client with support clj/cljs
 
 
 ```clojure
-io.github.cljazz/supabase {:git/sha "ef1205035e6941ea3d9663fb34855806a4b162e6"
+io.github.cljazz/supabase {:git/sha "a850ed47eb0daa8303f206ea60bd4b3bf59e1e0a"
                            :git/url "https://github.com/cljazz/supabase-clj"}
 
 ```
