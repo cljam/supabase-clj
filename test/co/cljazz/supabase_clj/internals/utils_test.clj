@@ -1,7 +1,7 @@
-(ns gotrue.internals.utils-test
+(ns co.cljazz.supabase-clj.internals.utils-test
   (:require
    [clojure.test :refer [deftest is testing]]
-   [gotrue.internals.utils :as utils]))
+   [co.cljazz.supabase-clj.internals.utils :as utils]))
 
 (deftest assoc-if-test
   (testing "assoc if should work"

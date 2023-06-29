@@ -1,10 +1,10 @@
-(ns gotrue.internals.http
+(ns co.cljazz.supabase-clj.internals.http
   (:require
    [clj-http.client :as client]
    [clojure.data.json :as json]
    [clojure.pprint :as pprint]
    [clojure.string :as str]
-   [gotrue.internals.utils :as utils]))
+   [co.cljazz.supabase-clj.internals.utils :as utils]))
 
 (add-tap (bound-fn* clojure.pprint/pprint))
 

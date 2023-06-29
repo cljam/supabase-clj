@@ -16,3 +16,7 @@ io.github.cljazz/supabase {:git/sha "ef1205035e6941ea3d9663fb34855806a4b162e6"
                            :git/url "https://github.com/cljazz/supabase-clj"}
 
 ```
+
+## Issues 
+
+https://github.com/cljazz/supabase-clj/issues

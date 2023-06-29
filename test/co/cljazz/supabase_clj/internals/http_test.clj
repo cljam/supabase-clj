@@ -1,6 +1,6 @@
-(ns gotrue.internals.http-test
+(ns co.cljazz.supabase-clj.internals.http-test
   (:require
-   [gotrue.internals.http :as http]
+   [co.cljazz.supabase-clj.internals.http :as http]
    [clojure.test :refer [deftest is testing]]))
 
 (deftest req-input->req-map-test

@@ -1,7 +1,7 @@
-(ns gotrue.core
+(ns co.cljazz.supabase-clj.core
   (:require
-   [gotrue.internals.http :refer [get! post!] :as internal.http]
-   [gotrue.internals.utils :as utils]))
+   [co.cljazz.supabase-clj.internals.http :refer [get! post!] :as internal.http]
+   [co.cljazz.supabase-clj.internals.utils :as utils]))
 
 (defn signin-with-email
   " 
@@ -51,7 +51,7 @@
                                    (assoc config
                                           :base-url base-url)))))
 
-(defn session-from-url 
+(defn session-from-url
   "
   If an account is created, users can login to your app.
   This functions returns an user 
@@ -85,9 +85,4 @@
      (post! "/token?grant_type=refresh_token" {:body {:refresh-token refresh-token}}
             {:base-url base-url
              :api-key api-key}))))
-
-
-
-
-
 

@@ -1,4 +1,4 @@
-(ns gotrue.internals.utils
+(ns co.cljazz.supabase-clj.internals.utils
   (:require
    [clojure.string :as str]))
 
