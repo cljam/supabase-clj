@@ -1,5 +1,8 @@
 # supabase-clj
 
+
+[![Clojars Project](https://img.shields.io/clojars/v/co.cljazz/supabase-clj.svg)](https://clojars.org/co.cljazz/supabase-clj)
+
 Supabase client with support **clj/cljs**
 
 ## Discalmer
